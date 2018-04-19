@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html style="font-size: 50px;">
+  <head>
+    <meta charset="utf-8">
+    <title>songpengfei</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="reset.css">
+    <script src="font-size.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="imgpreview.js"></script>
+
+    <style>
+      #iws-imglist li,#iws-imglist1 li{position: relative;display: inline-block;}
+      #iws-imglist img{width: 1.35rem;height: 1.35rem;margin-left: 0.16rem;margin-bottom: 0.02rem;}
+      .iws-strong{display: inline-block;width: 0.24rem;height: 0.24rem;background: url("delbtn.png") no-repeat;background-size: 100% 100%;;position: absolute;top: 0;right: 0;}
+      .addimg{width: 1.35rem;height: 1.35rem;/*background: url("addimg.png") no-repeat;background-size: 100% 100%;*/overflow: hidden;display: inline-block;margin-left: 0.16rem;position: relative;}
+      .addimg input{width: 1.37rem;height: 1.38rem;display: inline-block;opacity: 0;  filter:alpha(opacity=0);  -moz-opacity:0;  -khtml-opacity: 0;position: absolute;left: 0;top: 0;z-index: 9}
+      #iws-imglist .icon{width: 1.34rem;height: 1.35rem;margin:0;position: absolute;top: 0;left: 0;}
+
+
+      /*遮罩*/
+      .zZao{width: 100%;height: 100%;position: fixed;top: 0;left: 0;background-color: rgba(0,0,0,.5);}
+      .yulanimg{position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%,-50%);transform: translate(-50%,-50%);}
+    </style>
+  </head>
+  <body >
+  <div id="app">
+    <img-Preview @imgclick="tucen">
+      <img src="addimg.png" alt="" slot="icon" class="icon">
+    </img-Preview>
+    <!--图片预览遮罩-->
+    <div class="zZao" v-if="imgflg" @click="coloszZao">
+      <img :src="imgurl" alt="" class="yulanimg" :style='{width: imgwidth+"px"}'>
+    </div>
+  </div>
+  </body>
+</html>
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data: {
+            imgurl: 'addimg.png',
+            imgflg:false,
+            imgwidth:6,
+            htmlH: document.documentElement.clientHeight || document.body.clientHeight,
+            htmlW: document.documentElement.clientWidth || document.body.clientWidth,
+        },
+        methods:{
+            tucen:function(imgurl,widht,height){
+
+                this.imgwidth= widht>this.htmlW?this.htmlW:widht
+                this.imgurl=imgurl
+                this.imgflg=true
+            },
+            coloszZao:function () {
+                this.imgflg=false
+            }
+        }
+    })
+
+
+</script>
+
+
+
+
+
+
